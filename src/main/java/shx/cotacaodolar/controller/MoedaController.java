@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import shx.cotacaodolar.model.Moeda;
 import shx.cotacaodolar.service.MoedaService;
 
-
 @RestController
 @RequestMapping(value = "/")
 public class MoedaController {
@@ -23,20 +22,21 @@ public class MoedaController {
     private MoedaService moedaService;
 
     @GetMapping("/moeda/{data1}&{data2}")
-    public List<Moeda> getCotacoesPeriodo(@PathVariable("data1") String startDate, @PathVariable("data2") String endDate) throws IOException, MalformedURLException, ParseException{
+    public List<Moeda> getCotacoesPeriodo(@PathVariable("data1") String startDate,
+            @PathVariable("data2") String endDate) throws IOException, MalformedURLException, ParseException {
         return moedaService.getCotacoesPeriodo(startDate, endDate);
     }
-    
-    // Desenvolver uma rotina que retorna a cotação atual
+
     @GetMapping("/moeda/atual")
-    public List<Moeda> getCotacaoAtual() throws IOException, MalformedURLException, ParseException{
-        // return moedaService.getCotacaoAtual();
-        return null; // substituir pela chamada do método no service quando criado como está acima.
+    public Moeda getCotacaoAtual() throws IOException, MalformedURLException, ParseException {
+        return moedaService.getCotacaoAtual();
     }
-    
-    // Desenvolver uma rotina que recebe um período e retorna uma lista de cotações, somente com as cotações menores que a cotação atual.
+
+    // Desenvolver uma rotina que recebe um período e retorna uma lista de cotações,
+    // somente com as cotações menores que a cotação atual.
     @GetMapping("/moeda/menor-atual/{data1}&{data2}")
-    public List<Moeda> getCotacoesMenoresAtual(@PathVariable("data1") String startDate, @PathVariable("data2") String endDate) throws IOException, MalformedURLException, ParseException{
+    public List<Moeda> getCotacoesMenoresAtual(@PathVariable("data1") String startDate,
+            @PathVariable("data2") String endDate) throws IOException, MalformedURLException, ParseException {
         // return moedaService.getCotacoesMenoresAtual(startDate, endDate);
         return null; // substituir pela chamada do método no service quando criado como está acima.
     }
