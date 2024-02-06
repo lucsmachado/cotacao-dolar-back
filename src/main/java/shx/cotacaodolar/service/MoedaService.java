@@ -87,4 +87,12 @@ public class MoedaService {
         return cotacaoAtual;
     }
 
+    public List<Moeda> getCotacoesMenoresAtual(String startDate, String endDate)
+            throws IOException, MalformedURLException, ParseException {
+        List<Moeda> cotacoesPeriodo = getCotacoesPeriodo(startDate, endDate);
+        Moeda cotacaoAtual = getCotacaoAtual();
+        List<Moeda> cotacoesMenores = cotacoesPeriodo.stream().filter(moeda -> moeda.preco < cotacaoAtual.preco)
+                .toList();
+        return cotacoesMenores;
+    }
 }
